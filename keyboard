@@ -4,6 +4,9 @@
 
 ;Behold, a lil' keyboard with ranges C3 through B5!
 
+GUICreate("The played note", 100, 100)
+GUISetState(@SW_SHOW)
+
 Local $hDLL = DllOpen("user32.dll")
 
 Global $keyboardArr[21][3] = [["31", "C3", "130.81"] _
@@ -35,11 +38,13 @@ While 1
    For $i = 0 To (UBound($keyboardArr)-1)
 	  If _IsPressed($keyboardArr[$i][0], $hDLL) Then
 	  Beep($keyboardArr[$i][2], $noteDuration)
+	  GUICtrlCreateLabel($keyboardArr[$i][1], 45, 45)
 	  While _IsPressed($keyboardArr[$i][0], $hDLL)
 		 Sleep($sleepDuration)
 	  WEnd
 	  ElseIf _IsPressed($escKey, $hDLL) Then
 		 MsgBox($MB_SYSTEMMODAL, "Shutting down", "Aborting program.")
+		 GUIDelete()
 		 ExitLoop
 	  EndIf
    Next
