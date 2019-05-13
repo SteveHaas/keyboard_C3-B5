@@ -45,9 +45,8 @@ While 1
 	  ElseIf _IsPressed($escKey, $hDLL) Then
 		 MsgBox($MB_SYSTEMMODAL, "Shutting down", "Aborting program.")
 		 GUIDelete()
-		 ExitLoop
+		 DllClose($hDLL)
+		 Exit 0
 	  EndIf
    Next
 WEnd
-
-DllClose($hDLL)
